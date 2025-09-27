@@ -7,12 +7,11 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Arr;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
-use TightenCo\Jigsaw\File\ConfigFile;
-use TightenCo\Jigsaw\File\TemporaryFilesystem;
-use TightenCo\Jigsaw\Jigsaw;
-use TightenCo\Jigsaw\PathResolvers\PrettyOutputPathResolver;
+//use TightenCo\Jigsaw\File\ConfigFile;
+//use TightenCo\Jigsaw\File\TemporaryFilesystem;
+//use TightenCo\Jigsaw\Jigsaw;
+//use TightenCo\Jigsaw\PathResolvers\PrettyOutputPathResolver;
 
 class DeployCommand extends Command
 {
@@ -32,29 +31,29 @@ class DeployCommand extends Command
         $this->setName('deploy')
             ->setDescription('Deploy your site.')
             ->addArgument('target',
-                InputArgument::OPTIONAL,
+                InputArgument::REQUIRED,
                 'Where should we deploy your site?',
                 'ghpages')
             ->addOption('environment',
                 'e',
-                InputArgument::OPTIONAL,
+                InputOption::VALUE_OPTIONAL,
                 'What environment should we deploy?',
                 'production');
-//            ->addOption('watch', 'w', InputOption::VALUE_NONE, 'Should watch for file changes and rebuild?')
-//            ->addOption('cache', 'c', InputOption::VALUE_OPTIONAL, 'Should a cache be used when building the site?', 'false');
-        ;
     }
-
 
     protected function fire()
     {
-        // set up things
+        $target = $this->input->getOption('target');
+        $environment = $this->input->getOption('environment');
+
+        $this->console->info("Starting to deploy your {$environment} site to {$target}");
+
         return $this->deploy();
     }
 
     private function deploy()
     {
-         $startTime = microtime(true);
+
 
     }
 }
