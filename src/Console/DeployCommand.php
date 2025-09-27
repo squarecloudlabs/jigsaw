@@ -31,8 +31,15 @@ class DeployCommand extends Command
     {
         $this->setName('deploy')
             ->setDescription('Deploy your site.')
-            ->addArgument('target', InputArgument::OPTIONAL, 'Where should we deploy your site?', 'ghpages')
-//            ->addOption('gh', null, InputOption::VALUE_REQUIRED, 'Should the site use pretty URLs?', 'true')
+            ->addArgument('target',
+                InputArgument::OPTIONAL,
+                'Where should we deploy your site?',
+                'ghpages')
+            ->addOption('environment',
+                'e',
+                InputArgument::OPTIONAL,
+                'What environment should we deploy?',
+                'production');
 //            ->addOption('watch', 'w', InputOption::VALUE_NONE, 'Should watch for file changes and rebuild?')
 //            ->addOption('cache', 'c', InputOption::VALUE_OPTIONAL, 'Should a cache be used when building the site?', 'false');
         ;
